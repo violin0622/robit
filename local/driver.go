@@ -12,8 +12,6 @@ import (
 	"github.com/violin0622/robit"
 )
 
-var ErrLockHeld = errors.New("lock is already held")
-
 // Driver implements robit.Driver using local sync.Mutex.
 // This is a simple implementation for testing purposes.
 type Driver[ID comparable] struct {
@@ -35,7 +33,7 @@ func (d *Driver[ID]) Acquire(ctx context.Context, id ID, ttl time.Duration) (rob
 	defer d.mu.Unlock()
 
 	if holder, exists := d.locks[id]; exists && !holder.isExpired() {
-		return nil, ErrLockHeld
+		return nil, robit.ErrAlreadyHeld
 	}
 
 	// Create new lease

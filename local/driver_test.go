@@ -25,7 +25,7 @@ func TestDriver_Acquire(t *testing.T) {
 
 	// Second acquire with same ID should fail
 	_, err = d.Acquire(ctx, "test-lock", 5*time.Second)
-	if err != local.ErrLockHeld {
+	if err != robit.ErrAlreadyHeld {
 		t.Fatalf("expected ErrLockHeld, got: %v", err)
 	}
 
