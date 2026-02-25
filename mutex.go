@@ -2,7 +2,6 @@ package robit
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"sync"
 	"time"
@@ -10,7 +9,7 @@ import (
 	"github.com/go-logr/logr"
 )
 
-type Mutex[ID any] struct {
+type Mutex[ID comparable] struct {
 	id           ID
 	ttl          time.Duration
 	renewPeriod  time.Duration
@@ -27,10 +26,7 @@ type Mutex[ID any] struct {
 	t      *time.Ticker
 }
 
-var ErrAlreadyHeld = errors.New(`already held lock`)
-var ErrAlreadyReleased = errors.New(`already released lock`)
-
-func New[ID any](id ID, ttl time.Duration, d Driver[ID], opts ...Option[ID]) *Mutex[ID] {
+func New[ID comparable](id ID, ttl time.Duration, d Driver[ID], opts ...Option[ID]) *Mutex[ID] {
 
 	m := &Mutex[ID]{
 		id:           id,
@@ -130,7 +126,7 @@ func (m *Mutex[ID]) Stats() Stats {
 }
 
 func (m *Mutex[ID]) keepalive(ctx context.Context, l Lease) {
-NEXT:
+TICK:
 	select {
 	case <-ctx.Done():
 		return
@@ -139,7 +135,7 @@ NEXT:
 		return
 	case <-m.t.C:
 		m.renewLease(l)
-		goto NEXT
+		goto TICK
 	}
 }
 

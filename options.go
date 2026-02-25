@@ -6,21 +6,21 @@ import (
 	"github.com/go-logr/logr"
 )
 
-type Option[ID any] func(*Mutex[ID])
+type Option[ID comparable] func(*Mutex[ID])
 
-func WithLogr[ID any](l logr.Logger) Option[ID] {
+func WithLogr[ID comparable](l logr.Logger) Option[ID] {
 	return func(m *Mutex[ID]) { m.log = l }
 }
 
-func WithRenewPeriod[ID any](p time.Duration) Option[ID] {
+func WithRenewPeriod[ID comparable](p time.Duration) Option[ID] {
 	return func(m *Mutex[ID]) { m.renewPeriod = p }
 }
 
-func WithRenewTimeout[ID any](to time.Duration) Option[ID] {
+func WithRenewTimeout[ID comparable](to time.Duration) Option[ID] {
 	return func(m *Mutex[ID]) { m.renewTimeout = to }
 }
 
-func WithOnLost[ID any](fn ...func()) Option[ID] {
+func WithOnLost[ID comparable](fn ...func()) Option[ID] {
 	return func(m *Mutex[ID]) {
 		m.onLost = append(m.onLost, fn...)
 	}
