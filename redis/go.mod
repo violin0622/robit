@@ -2,11 +2,9 @@ module github.com/violin0622/robit/redis
 
 go 1.25.5
 
-replace github.com/violin0622/robit => ../
-
 require (
 	github.com/redis/go-redis/v9 v9.17.2
-	github.com/violin0622/robit v0.0.0-00010101000000-000000000000
+	github.com/violin0622/robit v0.1.0
 )
 
 require (

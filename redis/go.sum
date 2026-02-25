@@ -10,3 +10,5 @@ github.com/go-logr/logr v1.4.3 h1:CjnDlHq8ikf6E492q6eKboGOC0T8CDaOvkHCIg8idEI=
 github.com/go-logr/logr v1.4.3/go.mod h1:9T104GzyrTigFIr8wt5mBrctHMim0Nb2HLGrmQ40KvY=
 github.com/redis/go-redis/v9 v9.17.2 h1:P2EGsA4qVIM3Pp+aPocCJ7DguDHhqrXNhVcEp4ViluI=
 github.com/redis/go-redis/v9 v9.17.2/go.mod h1:u410H11HMLoB+TP67dz8rL9s6QW2j76l0//kSOd3370=
+github.com/violin0622/robit v0.1.0 h1:yPNb4dY56MjyV7O41u4ROa4+5xa9Dgs8GjPEU0qAbhg=
+github.com/violin0622/robit v0.1.0/go.mod h1:oU3KiM9suYTaehNryL9HAfcRcEmCVXZLRGsGTPmrjkQ=
